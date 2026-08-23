@@ -6,11 +6,11 @@ editor: visual
 
 ## O que é Git?
 
-ADICIONAR AQUI UM TEXTO EXPLICANDO O QUE É GIT
+Git é um software que faz o controle de versoes. Ele faz o manejo dos repositórios locais (computador) e repositórios remotos (e.g. GitHub). Foi Criado por Linus Torvalds em 2005 para o gerenciamento do desenvolvimento do Kernel Linux. É um software livre e de acesso aberto.
 
 ## O que é GitHub?
 
-ADICIONAR AQUI UM TEXTO EXPLICANDO O QUE É GITHUB
+Já o GitHub é um dos repositórios remotos que sao possíveis de utilizar com o Git. É possível fazer a hospedagem dos códigos e acessar as versoes.
 
 ## Como usar o GitHub com o RStudio?
 
