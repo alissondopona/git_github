@@ -1,0 +1,125 @@
+---
+title: "Introduçao do Git e GitHub"
+format: html
+editor: visual
+---
+
+## O que é Git?
+
+ADICIONAR AQUI UM TEXTO EXPLICANDO O QUE É GIT
+
+## O que é GitHub?
+
+ADICIONAR AQUI UM TEXTO EXPLICANDO O QUE É GITHUB
+
+## Como usar o GitHub com o RStudio?
+
+Nessa sessao, vamos direcionar nossos esforços para entender como podemos usar o Git e o GitHub para ter um controle de versoes de nossos códigos desenvolvidos no RStudio.
+
+Para isso, devemos conectar o RStudio com o GitHub. Faremos isso utilizando o pacote `{usethis}`.
+
+### Pacote `{usethis}`
+
+O pacote `{usethis}` oferece algumas funçoes que possibilitam a configuraçao do RStudio para conectá-lo com o GitHub. Para isso, o primeiro passo é instalá-lo, caso ainda nao esteja instalado
+
+```{r}
+#| eval: false
+install.packages("usethis")
+```
+
+Em seguida, vamos carregá-lo
+
+```{r}
+#| eval: false
+library(usethis)
+```
+
+O primeiro passo é configurar o RStudio para utilizar o GitHub. Usamos o pacotte `{usethis}` para isso, usamos a funçao `use_git_config()`:
+
+```{r}
+#| eval: false
+usethis::use_git_config(
+  user.name = "Alisson Dopona",
+  user.email = "alissondopona@gmail.com"
+)
+```
+
+Adicione o nome de usuário e email de acordo com a sua conta no GitHub. Para verificar se está configurado corretamente, utilizamos a funçao `git_strep()` para verificar se o nome e o email estao configurado corretamente.
+
+```{r}
+#| eval: false
+usethis::git_sitrep()
+```
+
+Há um mecanismo de segurança implementado recentemente no GitHub que chama é o Personal Access Token (PAT). Ele é uma forma segura de acessar o GitHub e executar nossas atividades, sem precisar estar inserindo o nome do usuário e senha para todos as operaçoes. Nós podemos criar ele através de linha de comando ou através da interface do site github. Inserimos o nome do token e a data de expiraçao. Por questoes de segurança, nao é recomendado criar tokens sem data de expiraçao. No comando acima, podemos observar que o TOKEN ainda nao está configurado:
+
+```{r}
+# • Personal access token for "https://github.com": <unset>
+```
+
+O primeiro passo entao é criar o Token. Nós podemos fazer isso diretamente na interface GitHub, ou entao, utilizar a funçao `create_github_token()` para direcionar a página do GitHub.
+
+```{r}
+#| eval: false
+usethis::create_github_token()
+```
+
+Em seguida, devemos configurá-lo, e iremos fazer isso utilizando a funçao `gitcreds_set()`:
+
+```{r}
+#| eval: false
+gitcreds::gitcreds_set()
+```
+
+Em seguida, é de bom tom verificar se está conectado agora. 
+
+```{r}
+#| eval: false
+usethis::git_sitrep()
+```
+
+Podemos observar que agora temos o seguinte retorno:
+
+```{r}
+# • Personal access token for "https://github.com": <discovered>
+```
+
+Isso significa que o deu certo a inserçao do token. É importante após a configuraçao do token, reiniciar a sessao do R em -> _*Session -> Restart R*_. Esse passo garante que o token foi internalizado.
+
+Sendo assim, nosso RStudio está configurado com o GitHub e agora nossas operaçoes podem ser versionadas.
+
+
+## Segunda forma
+
+Mas há uma forma adicional de fazer essa conexao. É através da criaçao de uma Variável de Ambiente que fica armazenado em um arquivo chamado `.Renviron`. Se esse arquivo nao existir, ele será criado no momento de rodar o código abaixo. Essa variável ambiente armazena o token, e o arquivo `.Renviron` permanece no computador. Por questoes de segurança, esse arquivo *NUNCA* deve ser armazenado no GitHub. Dessa forma podemos acessar, através da Variável de Ambiente, os tokens quando nessesário.
+
+Dessa forma, se você tem um token para cada projeto, você pode armazenar esse arquivo na raiz do projeto, e adiciona o arquivo no `.gitignore` para que ele nao fique disponível no GitHub.
+
+Para criar a variável, vamos utilizar a funçao `edit_r_environ()` também do pacote `{usethis}`. Ela irá abrir uma aba no RStudio do arquivo `.Renrion`, mostrando o local que ela está armazenada no seu dispositivo. No meu caso, está no diretório `alisson` do `/home`. Note que ela possui um . no início do nome, o que significa que é um arquivo oculto no diretório.
+
+
+```{r}
+#| eval: false
+usethis::edit_r_environ()
+```
+
+Ao abrir o arquivo, indicamos o nome da variável e adicionamos o token nela. Por exemplo:
+
+```{r}
+#| eval: false
+GITHUB_TOKEN=ADICIONAOTOKENAQUI
+```
+
+Salvamos esse arquivo e reiniciamos a sessao do R em -> _*Session -> Restart R*_. 
+
+
+
+
+
+
+
+
+
+
+
+
