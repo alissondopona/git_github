@@ -101,11 +101,78 @@ Para criar a variável, vamos utilizar a funçao `edit_r_environ()` também do p
 usethis::edit_r_environ()
 ```
 
+Podemos fazer também através do terminal diretamente:
+
+```{bash}
+nano ~/.Renviron
+```
+
 Ao abrir o arquivo, indicamos o nome da variável e adicionamos o token nela. Por exemplo:
 
 ```{r}
 #| eval: false
-GITHUB_TOKEN=ADICIONAOTOKENAQUI
+GITHUB_PAT=ADICIONAOTOKENAQUI
 ```
 
 Salvamos esse arquivo e reiniciamos a sessao do R em -\> *Session -\> Restart R*.
+
+Podemos verificar se funcionou com o comando:
+
+```{r}
+#| eval: false
+Sys.getenv("GITHUB_PAT")
+```
+
+Pronto, se aparecer o seu token, significa que ele está configurado, e nao precisa fazer mais nada para para utilizá-lo no dia a dia.
+
+## O que fazer após formatar a distribuiçao GNU/Linux?
+
+Aqui, vamos demonstrar como reconfigurar o diretório local para estar sincronizado com o repositório na nuvem.
+
+O primeiro passo, é verificar o status do diretório via terminal para certificar a existência de um diretório .git:
+
+```{bash}
+#| eval: false
+ls -la
+```
+
+Caso haja o diretório .git significa que o histórico e configuraçao remota sobreviveram. Assim, basta verificar o remote e pull:
+
+```{bash}
+#| eval: false
+git remote -v
+git status
+git pull
+```
+
+Caso contrário (o mais provável) o ideal é re-clonar. Para fazer isso, seguimos a sequencia de comando a seguir:
+
+Já no diretório do projeto, fazemos o comando git init:
+
+```{bash}
+#| eval: false
+git init
+```
+
+Em seguinda fazemos a clonagem:
+
+```{bash}
+#| eval: false
+git remote add origin https://github.com/alissondopona/git_github.git
+```
+
+Depois:
+
+```{bash}
+#| eval: false
+git fetch
+```
+
+E finalmente checamos se está tudo ok:
+
+```{bash}
+#| eval: false
+git checkout main
+```
+
+No Rstudio, basta reiniciar o projeto para que possa fazer o comit pela IDE.
