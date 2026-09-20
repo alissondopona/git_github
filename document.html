@@ -237,6 +237,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>O resultado esperado é <code>nothing to commit, working tree clean</code> e <code>[origin/main]</code> ao lado do branch no <code>branch -vv</code>.</p>
 </section>
+<section id="em-uma-situaçao-em-que-há-um-curso-ou-disciplina-que-o-material-fica-todo-disponível-em-um-repositório-github-como-manejar" class="level2">
+<h2 class="anchored" data-anchor-id="em-uma-situaçao-em-que-há-um-curso-ou-disciplina-que-o-material-fica-todo-disponível-em-um-repositório-github-como-manejar">Em uma situaçao em que há um curso ou disciplina que o material fica todo disponível em um repositório GitHub, como manejar?</h2>
+<p>Algumas vezes, participamos de disciplinas ou cursos em que o material fica todo disponibilizado em um repositório no GitHub. Nesse caso, há algumas questoes que precisam ser manejadas com cuidado para que nao perca conteúdo quando o professor atualizar o repositório, e que possamos fazer nossas modificaçoes.</p>
+<p>O primeiro passo, é fazer o <code>fork</code> no repositório. Com o <code>fork</code> feito, vamos seguir fazendo a clonagem do <strong>nosso</strong> fork no terminal do nosso diretório:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/SEU-USUARIO/nome-do-repo.git</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> nome-do-repo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Em seguida, precisamos adicionar o repositório do professor (ou quem estiver ministrando a disciplina) como <code>upstream</code>. Esse passo é importante para que possamos receber as atualizaçoes do professor. Entao adicionamos o repositório do professor como upstream:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add upstream https://github.com/PROFESSOR/nome-do-repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Em seguida, seguimos com a verificaçao:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O resultado deve ser algo assim:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">origin</span>    https://github.com/SEU-USUARIO/nome-do-repo.git <span class="er">(</span><span class="ex">fetch</span><span class="kw">)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">origin</span>    https://github.com/SEU-USUARIO/nome-do-repo.git <span class="er">(</span><span class="ex">push</span><span class="kw">)</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">upstream</span>  https://github.com/PROFESSOR/nome-do-repo.git <span class="er">(</span><span class="ex">fetch</span><span class="kw">)</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="ex">upstream</span>  https://github.com/PROFESSOR/nome-do-repo.git <span class="er">(</span><span class="ex">push</span><span class="kw">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Quando o profesor avisar que houve atualizaçao do repositório, usamos os seguinte comando:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch upstream</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>E</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge upstream/main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O <code>main</code> significa em que local está o repositório. Podemos substituir se estiver em <code>master</code>.</p>
+<p>Esses passos trazem as mudanças do professor para o branch local, <strong>mesclando</strong> com o que já temos no nosso repositório, <strong>sem apagar nossos arquivos</strong>.</p>
+<p>Por último, para que possamos manter nosso repositório no GitHub atualizado com nossas alteraçoes locais, usamos os seguinte comandos para subir essas alteraçoes:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"minhas atividades"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Dessa forma, as alteraçoes vao diretamente para o fork, sem precisar de <code>pull request</code>.</p>
+<blockquote class="blockquote">
+<p>Há, porém, uma questao importante. Quando há uma alteraçao no mesmo arquivo dos dois lados (professor e aluno) poderá ocorrer conflito. Uma dica é manter as atividades em diretório separado.</p>
+</blockquote>
+</section>
 
 </main>
 <!-- /main column -->

@@ -218,3 +218,78 @@ git branch -vv
 ```
 
 O resultado esperado é `nothing to commit, working tree clean` e `[origin/main]` ao lado do branch no `branch -vv`.
+
+## Em uma situaçao em que há um curso ou disciplina que o material fica todo disponível em um repositório GitHub, como manejar?
+
+Algumas vezes, participamos de disciplinas ou cursos em que o material fica todo disponibilizado em um repositório no GitHub. Nesse caso, há algumas questoes que precisam ser manejadas com cuidado para que nao perca conteúdo quando o professor atualizar o repositório, e que possamos fazer nossas modificaçoes.
+
+O primeiro passo, é fazer o `fork` no repositório. Com o `fork` feito, vamos seguir fazendo a clonagem do **nosso** fork no terminal do nosso diretório:
+
+```{bash}
+#| eval: false
+git clone https://github.com/SEU-USUARIO/nome-do-repo.git
+cd nome-do-repo
+```
+
+Em seguida, precisamos adicionar o repositório do professor (ou quem estiver ministrando a disciplina) como `upstream`. Esse passo é importante para que possamos receber as atualizaçoes do professor. Entao adicionamos o repositório do professor como upstream:
+
+```{bash}
+#| eval: false
+git remote add upstream https://github.com/PROFESSOR/nome-do-repo.git
+```
+
+Em seguida, seguimos com a verificaçao:
+
+```{bash}
+#| eval: false
+git remote -v
+```
+
+O resultado deve ser algo assim:
+
+```{bash}
+#| eval: false
+origin    https://github.com/SEU-USUARIO/nome-do-repo.git (fetch)
+origin    https://github.com/SEU-USUARIO/nome-do-repo.git (push)
+upstream  https://github.com/PROFESSOR/nome-do-repo.git (fetch)
+upstream  https://github.com/PROFESSOR/nome-do-repo.git (push)
+```
+
+Quando o profesor avisar que houve atualizaçao do repositório, usamos os seguinte comando:
+
+```{bash}
+#| eval: false
+git fetch upstream
+```
+
+E
+
+```{bash}
+#| eval: false
+git merge upstream/main
+```
+
+O `main` significa em que local está o repositório. Podemos substituir se estiver em `master`.
+
+Esses passos trazem as mudanças do professor para o branch local, **mesclando** com o que já temos no nosso repositório, **sem apagar nossos arquivos**.
+
+Por último, para que possamos manter nosso repositório no GitHub atualizado com nossas alteraçoes locais, usamos os seguinte comandos para subir essas alteraçoes:
+
+```{bash}
+#| eval: false
+git add .
+```
+
+```{bash}
+#| eval: false
+git commit -m "minhas atividades"
+```
+
+```{bash}
+#| eval: false
+git push origin main
+```
+
+Dessa forma, as alteraçoes vao diretamente para o fork, sem precisar de `pull request`.
+
+> Há, porém, uma questao importante. Quando há uma alteraçao no mesmo arquivo dos dois lados (professor e aluno) poderá ocorrer conflito. Uma dica é manter as atividades em diretório separado.
