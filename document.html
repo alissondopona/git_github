@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="document_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="document_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="document_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="document_files/libs/bootstrap/bootstrap-3e91a44c2e26c4ce04c5ff8d40cc0831.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="document_files/libs/bootstrap/bootstrap-adea30caf93eda5ed64588dc162dd104.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -103,11 +103,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="o-que-é-git" class="level2">
 <h2 class="anchored" data-anchor-id="o-que-é-git">O que é Git?</h2>
-<p>ADICIONAR AQUI UM TEXTO EXPLICANDO O QUE É GIT</p>
+<p>Git é um software que faz o controle de versoes. Ele faz o manejo dos repositórios locais (computador) e repositórios remotos (e.g.&nbsp;GitHub). Foi Criado por Linus Torvalds em 2005 para o gerenciamento do desenvolvimento do Kernel Linux. É um software livre e de acesso aberto.</p>
 </section>
 <section id="o-que-é-github" class="level2">
 <h2 class="anchored" data-anchor-id="o-que-é-github">O que é GitHub?</h2>
-<p>ADICIONAR AQUI UM TEXTO EXPLICANDO O QUE É GITHUB</p>
+<p>Já o GitHub é um dos repositórios remotos que sao possíveis de utilizar com o Git. É possível fazer a hospedagem dos códigos e acessar as versoes.</p>
 </section>
 <section id="como-usar-o-github-com-o-rstudio" class="level2">
 <h2 class="anchored" data-anchor-id="como-usar-o-github-com-o-rstudio">Como usar o GitHub com o RStudio?</h2>
@@ -138,25 +138,104 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># • Personal access token for "https://github.com": &lt;unset&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>O primeiro passo entao é criar o Token. Em seguida, devemos configurá-lo, e iremos fazer isso utilizando a funçao <code>gitcreds_set()</code>:</p>
+<p>O primeiro passo entao é criar o Token. Nós podemos fazer isso diretamente na interface GitHub, ou entao, utilizar a funçao <code>create_github_token()</code> para direcionar a página do GitHub.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Em seguida, devemos configurá-lo, e iremos fazer isso utilizando a funçao <code>gitcreds_set()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Em seguida, é de bom tom verificar se está conectado agora.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">git_sitrep</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">git_sitrep</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Podemos observar que agora temos o seguinte retorno:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># • Personal access token for "https://github.com": &lt;discovered&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># • Personal access token for "https://github.com": &lt;discovered&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Isso significa que o deu certo a inserçao do token. É importante após a configuraçao do token, reiniciar a sessao do R em -&gt; <em><em>Session -&gt; Restart R</em></em>. Esse passo garante que o token foi internalizado.</p>
+<p>Isso significa que o deu certo a inserçao do token. É importante após a configuraçao do token, reiniciar a sessao do R em -&gt; <em>Session -&gt; Restart R</em>. Esse passo garante que o token foi internalizado.</p>
 <p>Sendo assim, nosso RStudio está configurado com o GitHub e agora nossas operaçoes podem ser versionadas.</p>
 </section>
 </section>
 <section id="segunda-forma" class="level2">
 <h2 class="anchored" data-anchor-id="segunda-forma">Segunda forma</h2>
-<p>Mas há uma forma adicional de fazer essa conexao. Ela é através de um arquivo chamado <code>.Renviron</code>. Nele, podemos armazenar chaves e tokens necessários para acessar dados públicos, como API e GitHubs. Dessa forma, armazenamos as chaves e toens nesses arquivos em nosso computador</p>
+<p>Mas há uma forma adicional de fazer essa conexao. É através da criaçao de uma Variável de Ambiente que fica armazenado em um arquivo chamado <code>.Renviron</code>. Se esse arquivo nao existir, ele será criado no momento de rodar o código abaixo. Essa variável ambiente armazena o token, e o arquivo <code>.Renviron</code> permanece no computador. Por questoes de segurança, esse arquivo <em>NUNCA</em> deve ser armazenado no GitHub. Dessa forma podemos acessar, através da Variável de Ambiente, os tokens quando nessesário.</p>
+<p>Dessa forma, se você tem um token para cada projeto, você pode armazenar esse arquivo na raiz do projeto, e adiciona o arquivo no <code>.gitignore</code> para que ele nao fique disponível no GitHub.</p>
+<p>Para criar a variável, vamos utilizar a funçao <code>edit_r_environ()</code> também do pacote <code>{usethis}</code>. Ela irá abrir uma aba no RStudio do arquivo <code>.Renrion</code>, mostrando o local que ela está armazenada no seu dispositivo. No meu caso, está no diretório <code>alisson</code> do <code>/home</code>. Note que ela possui um . no início do nome, o que significa que é um arquivo oculto no diretório.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_environ</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Podemos fazer também através do terminal diretamente:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.Renviron</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Ao abrir o arquivo, indicamos o nome da variável e adicionamos o token nela. Por exemplo:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>GITHUB_PAT<span class="ot">=</span>ADICIONAOTOKENAQUI</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Salvamos esse arquivo e reiniciamos a sessao do R em -&gt; <em>Session -&gt; Restart R</em>.</p>
+<p>Podemos verificar se funcionou com o comando:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">"GITHUB_PAT"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Pronto, se aparecer o seu token, significa que ele está configurado, e nao precisa fazer mais nada para para utilizá-lo no dia a dia.</p>
+<p>No Rstudio, basta reiniciar o projeto para que possa fazer o comit pela IDE.</p>
+</section>
+<section id="o-que-fazer-após-formatar-a-distribuiçao-gnulinux" class="level2">
+<h2 class="anchored" data-anchor-id="o-que-fazer-após-formatar-a-distribuiçao-gnulinux">O que fazer após formatar a distribuiçao GNU/Linux?</h2>
+<p>Aqui, vamos demonstrar como reconfigurar o diretório local para estar sincronizado com o repositório na nuvem.</p>
+<p>O primeiro passo, é configurar sua identidade no git e GitHub. Utilize seu use.name e email de acordo com aquele configurado no GitHub:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Seu Nome"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"seu@email.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Em seguida, configuramos branches, para nao criar um paralelo (master) com o principal (main) utilizado pelo GitHub:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.defaultBranch main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Confirmamos se foi configurado corretamente:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--get</span> init.defaultBranch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Se retornou <code>main</code> entao significa que deu certo</p>
+<p>Agora, vamos verificar o status do diretório via terminal para certificar a existência de um diretório .git:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Caso haja o diretório .git significa que o histórico e configuraçao remota sobreviveram. Assim, basta verificar o <code>remote</code> e <code>pull</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Caso contrário (o mais provável) o ideal é reconectar via <code>init</code> + <code>remote add</code>, em vez de clonar por cima de arquivos já existentes:</p>
+<p>No diretório do projeto, fazemos o comando <code>git init</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Em seguinda fazemos a clonagem:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/seuusuario/repositorio.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Depois:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Em seguiga checamos se está tudo ok:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Por fim, garantimos o vínculo (tracking) entre o branch local e o remoto — isso é o que habilita Pull/Push corretamente no RStudio:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Verificaçao final:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-vv</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O resultado esperado é <code>nothing to commit, working tree clean</code> e <code>[origin/main]</code> ao lado do branch no <code>branch -vv</code>.</p>
 </section>
 
 </main>

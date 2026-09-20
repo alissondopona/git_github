@@ -104,6 +104,7 @@ usethis::edit_r_environ()
 Podemos fazer também através do terminal diretamente:
 
 ```{bash}
+#| eval: false
 nano ~/.Renviron
 ```
 
@@ -125,18 +126,44 @@ Sys.getenv("GITHUB_PAT")
 
 Pronto, se aparecer o seu token, significa que ele está configurado, e nao precisa fazer mais nada para para utilizá-lo no dia a dia.
 
+No Rstudio, basta reiniciar o projeto para que possa fazer o comit pela IDE.
+
 ## O que fazer após formatar a distribuiçao GNU/Linux?
 
 Aqui, vamos demonstrar como reconfigurar o diretório local para estar sincronizado com o repositório na nuvem.
 
-O primeiro passo, é verificar o status do diretório via terminal para certificar a existência de um diretório .git:
+O primeiro passo, é configurar sua identidade no git e GitHub. Utilize seu use.name e email de acordo com aquele configurado no GitHub:
+
+```{bash}
+#| eval: false
+git config --global user.name "Seu Nome"
+git config --global user.email "seu@email.com"
+```
+
+Em seguida, configuramos branches, para nao criar um paralelo (master) com o principal (main) utilizado pelo GitHub:
+
+```{bash}
+#| eval: false
+git config --global init.defaultBranch main
+```
+
+Confirmamos se foi configurado corretamente:
+
+```{bash}
+#| eval: false
+git config --global --get init.defaultBranch
+```
+
+Se retornou `main` entao significa que deu certo
+
+Agora, vamos verificar o status do diretório via terminal para certificar a existência de um diretório .git:
 
 ```{bash}
 #| eval: false
 ls -la
 ```
 
-Caso haja o diretório .git significa que o histórico e configuraçao remota sobreviveram. Assim, basta verificar o remote e pull:
+Caso haja o diretório .git significa que o histórico e configuraçao remota sobreviveram. Assim, basta verificar o `remote` e `pull`:
 
 ```{bash}
 #| eval: false
@@ -145,9 +172,9 @@ git status
 git pull
 ```
 
-Caso contrário (o mais provável) o ideal é re-clonar. Para fazer isso, seguimos a sequencia de comando a seguir:
+Caso contrário (o mais provável) o ideal é reconectar via `init` + `remote add`, em vez de clonar por cima de arquivos já existentes:
 
-Já no diretório do projeto, fazemos o comando git init:
+No diretório do projeto, fazemos o comando `git init`:
 
 ```{bash}
 #| eval: false
@@ -158,7 +185,7 @@ Em seguinda fazemos a clonagem:
 
 ```{bash}
 #| eval: false
-git remote add origin https://github.com/alissondopona/git_github.git
+git remote add origin https://github.com/seuusuario/repositorio.git
 ```
 
 Depois:
@@ -168,11 +195,26 @@ Depois:
 git fetch
 ```
 
-E finalmente checamos se está tudo ok:
+Em seguiga checamos se está tudo ok:
 
 ```{bash}
 #| eval: false
 git checkout main
 ```
 
-No Rstudio, basta reiniciar o projeto para que possa fazer o comit pela IDE.
+Por fim, garantimos o vínculo (tracking) entre o branch local e o remoto — isso é o que habilita Pull/Push corretamente no RStudio:
+
+```{bash}
+#| eval: false
+git push -u origin main
+```
+
+Verificaçao final:
+
+```{bash}
+#| eval: false
+git status
+git branch -vv
+```
+
+O resultado esperado é `nothing to commit, working tree clean` e `[origin/main]` ao lado do branch no `branch -vv`.
