@@ -71,7 +71,7 @@ Em seguida, devemos configurá-lo, e iremos fazer isso utilizando a funçao `git
 gitcreds::gitcreds_set()
 ```
 
-Em seguida, é de bom tom verificar se está conectado agora. 
+Em seguida, é de bom tom verificar se está conectado agora.
 
 ```{r}
 #| eval: false
@@ -84,10 +84,9 @@ Podemos observar que agora temos o seguinte retorno:
 # • Personal access token for "https://github.com": <discovered>
 ```
 
-Isso significa que o deu certo a inserçao do token. É importante após a configuraçao do token, reiniciar a sessao do R em -> _*Session -> Restart R*_. Esse passo garante que o token foi internalizado.
+Isso significa que o deu certo a inserçao do token. É importante após a configuraçao do token, reiniciar a sessao do R em -\> *Session -\> Restart R*. Esse passo garante que o token foi internalizado.
 
 Sendo assim, nosso RStudio está configurado com o GitHub e agora nossas operaçoes podem ser versionadas.
-
 
 ## Segunda forma
 
@@ -96,7 +95,6 @@ Mas há uma forma adicional de fazer essa conexao. É através da criaçao de um
 Dessa forma, se você tem um token para cada projeto, você pode armazenar esse arquivo na raiz do projeto, e adiciona o arquivo no `.gitignore` para que ele nao fique disponível no GitHub.
 
 Para criar a variável, vamos utilizar a funçao `edit_r_environ()` também do pacote `{usethis}`. Ela irá abrir uma aba no RStudio do arquivo `.Renrion`, mostrando o local que ela está armazenada no seu dispositivo. No meu caso, está no diretório `alisson` do `/home`. Note que ela possui um . no início do nome, o que significa que é um arquivo oculto no diretório.
-
 
 ```{r}
 #| eval: false
@@ -110,16 +108,4 @@ Ao abrir o arquivo, indicamos o nome da variável e adicionamos o token nela. Po
 GITHUB_TOKEN=ADICIONAOTOKENAQUI
 ```
 
-Salvamos esse arquivo e reiniciamos a sessao do R em -> _*Session -> Restart R*_. 
-
-
-
-
-
-
-
-
-
-
-
-
+Salvamos esse arquivo e reiniciamos a sessao do R em -\> *Session -\> Restart R*.
